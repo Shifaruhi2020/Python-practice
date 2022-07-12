@@ -1,0 +1,38 @@
+class MyHashSet:
+
+    def __init__(self):
+        self.size=1000     
+# size is the 1000 becoz mentioned in the problem
+        self.table=[None]  * self.size
+# initialising the hash table
+
+#         this method is being used to add the inserted values in the hash set
+#         to know where to place the inserted value we will do the modulo of the 
+#         inserted value with the size of the table which is done the method                   checking_hash_value
+    
+    def add(self, key: int) -> None:
+        hv=self.checking_hash_value(key)        
+        if self.table[hv]==None:
+            self.table[hv]=[key]
+        else:
+#         this is to check if he value already exists in the bucket or not
+            self.table[hv].append(key)
+    
+        
+# this methods generates the hash value or the the placeor the index where           the value can       
+    def checking_hash_value(self,key):
+        return key % self.size
+    
+    def remove(self, key: int) -> None:
+        hv=self.checking_hash_value(key)
+#         we have used if and while loop so that indented values can all be removed instead of just one value
+        if self.table[hv]!=None:
+            while key in self.table[hv]:
+                self.table[hv].remove(key)
+        
+
+    def contains(self, key: int) -> bool:
+         hv=self.checking_hash_value(key)
+         if self.table[hv]!=None:
+            return key in self.table[hv]
+         return False
